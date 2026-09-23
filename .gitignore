@@ -1,0 +1,7 @@
+node_modules/
+.local/
+artifacts/
+*.zip
+.env
+.env.*
+scripts/prepare-images.cjs

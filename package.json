@@ -1,0 +1,15 @@
+{
+  "name": "yohaku-local-design",
+  "version": "0.1.0",
+  "private": true,
+  "description": "YOHAKU KENCHIKU — local design development, before WordPress theme export",
+  "scripts": {
+    "dev": "node scripts/server.cjs",
+    "check:layout": "node scripts/check-local.cjs",
+    "check:motion": "node scripts/check-motion.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "sharp": "0.35.4"
+  }
+}
