@@ -26,7 +26,14 @@ const fs = require('node:fs');
     await page.screenshot({path:`artifacts/motion-hero-${width}.png`});
     assert(await page.evaluate(()=>document.fonts.check('28px Cinzel')));
     const hero=await page.locator('.hero-image').evaluate(e=>({animation:getComputedStyle(e).animationName,duration:getComputedStyle(e).animationDuration,transform:getComputedStyle(e).transform}));
-    assert.equal(hero.animation,'hero-approach');
+    assert.equal(hero.animation,width===1440?'hero-approach':'none');
+    if(width===390) {
+      const before=await page.locator('.hero-image').boundingBox();
+      await page.evaluate(()=>window.scrollTo({top:240,behavior:'instant'}));
+      const after=await page.locator('.hero-image').boundingBox();
+      assert.equal(after.width,before.width);assert.equal(after.height,before.height);
+      assert.equal(await page.locator('.hero-image').evaluate(e=>getComputedStyle(e).transform),'none');
+    }
     const padding=await page.locator('.concept').evaluate(e=>getComputedStyle(e).paddingTop);
     assert.equal(padding,width===1440?'0px':'72px');
     await page.locator('.concept-photo').scrollIntoViewIfNeeded();

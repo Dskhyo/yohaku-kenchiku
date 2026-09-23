@@ -35,6 +35,10 @@
 @keyframes logo-rule { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: scaleX(1); } }
 .intro-complete .hero-image { animation: hero-approach 24s cubic-bezier(.15,.35,.35,1) both; }
 @keyframes hero-approach { from { transform: scale(1); } to { transform: scale(1.09); } }
+/* Keep touch-device photography still, including landscape phones. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .intro-complete .hero-image { animation: none; transform: none; }
+}
 /* Photos dissolve in their final position: no translate or entrance zoom. */
 .motion-ready .reveal { transform: none; transition: opacity var(--reveal-duration) ease; }
 .motion-ready .reveal.is-visible { transform: none; }

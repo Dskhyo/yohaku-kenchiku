@@ -18,7 +18,7 @@ http://127.0.0.1:4173 を開きます。依存パッケージのインストー�
 
 - `index.html`：TOPページ。画像内の文章ではなく指定書の文章を優先。
 - `assets/css/style.css`：PC・Tablet・Mobile、余白、文字組み、アニメーション。
-- `assets/css/motion.css`：Cinzel、4秒ロゴローディング、24秒FVズーム、行単位のテキスト表示、2.4秒画像フェード。PC（901px以上）のCONCEPT上余白は0。
+- `assets/css/motion.css`：Cinzel、4秒ロゴローディング、PCのみ24秒FVズーム、行単位のテキスト表示、2.4秒画像フェード。900px以下とタッチ端末ではFVの拡大を無効化。PC（901px以上）のCONCEPT上余白は0。
 - `assets/js/intro.js`：初回描画前のローディング開始と4秒後の解除。再読み込み時に毎回再生。
 - `assets/js/main.js`：メニュー、スクロール表示、確認用の詳細画面とフォーム。
 - `assets/images/`：生成した架空の建築写真（WebP）。
