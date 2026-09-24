@@ -1,0 +1,28 @@
+AxisMotion.add(({gsap,ScrollTrigger}) => {
+  const cleanups=[];
+  const city=document.querySelector('.city-photo');
+  const brace=document.createElement('div');brace.className='city-brace';brace.setAttribute('aria-hidden','true');city.append(brace);
+  const state=document.createElement('span');state.className='problem-state';state.textContent='EARTHQUAKE / MOVEMENT';city.append(state);
+  AxisMotion.draw(gsap,'.city-photo .wave path',document.querySelector('.problem'));
+  const problem=gsap.timeline({scrollTrigger:{trigger:'.problem',start:'top 80%',end:'bottom 35%',scrub:true}});
+  problem.to('.city-photo img',{x:1.7,duration:.1}).to('.city-photo img',{x:-1.7,duration:.1}).to('.city-photo img',{x:1.4,duration:.1}).to('.city-photo img',{x:-1,duration:.1}).to('.city-photo img',{x:0,duration:.2}).fromTo(brace,{clipPath:'inset(0 0 100% 0)',opacity:0},{clipPath:'inset(0 0 0% 0)',opacity:1,duration:.4},.35);
+  problem.eventCallback('onUpdate',()=>{state.textContent=problem.progress()>.65?'CONTROL / STABILITY':'EARTHQUAKE / MOVEMENT';});
+  cleanups.push(()=>{brace.remove();state.remove();});
+  const model=document.querySelector('.analysis-model');
+  const overlay=document.createElement('div');overlay.className='structure-motion-overlay';overlay.innerHTML=AxisMotion.frame();model.append(overlay);
+  const structure=gsap.timeline({scrollTrigger:{trigger:'.structure',start:'top 85%',end:'bottom 25%',scrub:.3}});
+  structure.to(model.querySelector('img'),{opacity:.12,duration:1}).fromTo(overlay,{opacity:0},{opacity:1,duration:1},0).fromTo(overlay.querySelector('.frame-control'),{opacity:0},{opacity:1,duration:.7},1).fromTo(overlay.querySelector('.frame-load'),{opacity:0},{opacity:1,duration:.7},1.6).to(overlay,{opacity:0,duration:.8},2.5).to(model.querySelector('img'),{opacity:1,duration:.8},2.5);
+  cleanups.push(()=>overlay.remove());
+  const metrics=[...document.querySelectorAll('.metrics dd')];
+  const originals=metrics.map(el=>el.innerHTML);
+  const status=document.createElement('span');status.className='calculation-state';status.setAttribute('aria-hidden','true');status.textContent='ANALYSIS / STANDBY';document.querySelector('.metrics').after(status);
+  metrics.forEach(el=>{el.setAttribute('aria-label',el.textContent);});
+  const stateNumber={step:0};let previous=-1;
+  const calc=gsap.to(stateNumber,{step:18,duration:1.15,ease:'none',paused:true,onStart:()=>status.textContent='CALCULATING / CONCEPT DATA',onUpdate:()=>{const step=Math.floor(stateNumber.step);if(step===previous)return;previous=step;metrics.forEach((el,i)=>{el.innerHTML=`<span class="scramble-value" aria-hidden="true">${((step*137+i*311+248)%1500).toLocaleString('en-US')}</span>`;});},onComplete:()=>{metrics.forEach((el,i)=>el.innerHTML=originals[i]);status.textContent='VERIFIED / CONCEPT DATA';}});
+  ScrollTrigger.create({trigger:'.metrics',start:'top 88%',once:true,onEnter:()=>calc.play()});
+  cleanups.push(()=>{metrics.forEach((el,i)=>{el.innerHTML=originals[i];el.removeAttribute('aria-label');});status.remove();});
+  gsap.utils.toArray('.project-image').forEach(el=>gsap.from(el,{clipPath:'inset(0 0 100% 0)',duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 93%',once:true}}));
+  gsap.from('.about-word',{xPercent:8,ease:'none',scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:true}});
+  gsap.utils.toArray('.report').forEach(el=>gsap.from(el,{clipPath:'inset(0 100% 0 0)',duration:.7,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 94%',once:true}}));
+  return ()=>cleanups.forEach(fn=>fn());
+});
