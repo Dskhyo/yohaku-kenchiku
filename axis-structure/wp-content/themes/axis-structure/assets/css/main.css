@@ -31,3 +31,17 @@ body{font-family:"AXIS DIN",var(--japanese);font-weight:500}
 @media(max-width:600px){.journal:before{inset:0 0 auto;height:310px;background-position:75% 50%;background-size:490px 350px;mask-image:linear-gradient(180deg,#000 0%,#000 65%,transparent 100%);opacity:.85}.journal-grid>div:first-child{position:relative}.journal-grid>div:first-child>h2,.journal-grid>div:first-child>p{position:relative}}
 @media(max-width:1150px){.header-contact{font-size:12px;padding:13px 16px;gap:16px}}
 @media(max-width:600px){.header-contact{font-size:11px;min-height:44px;padding:12px 14px;letter-spacing:.02em}.site-header{gap:14px}}
+
+/* Desktop section spacing: approximately 2.5 times the original vertical padding. */
+@media(min-width:901px){
+ .problem{padding-top:95px;padding-bottom:87.5px}
+ .technology{padding-top:115px;padding-bottom:110px}
+ .data{padding-top:100px;padding-bottom:75px}
+ .structure{padding-top:105px;padding-bottom:112.5px}
+ .projects{padding-top:165px;padding-bottom:150px}
+ .about{padding-top:175px;padding-bottom:237.5px}
+ .journal{padding-top:137.5px;padding-bottom:150px}
+ .contact{padding-top:125px;padding-bottom:187.5px}
+ .site-footer{padding-top:112.5px;padding-bottom:60px}
+}
+@media(min-width:1700px){main>.section{padding-top:187.5px;padding-bottom:187.5px}}

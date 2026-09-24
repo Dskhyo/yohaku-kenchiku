@@ -38,3 +38,12 @@
 .mobile-analysis-stage .phase-copy-title{font-size:15px;line-height:1.65}
 .mobile-analysis-stage .phase-copy-body{font-size:12px;line-height:1.85}
 @media(max-width:900px) and (max-height:700px){.has-phases .mobile-analysis-stage .technology-model{height:150px}.mobile-analysis-stage .phase-panel{padding-top:12px}.mobile-analysis-stage .phase-copy-title{font-size:14px;margin-bottom:6px}.mobile-analysis-stage .phase-panel .phase-description{margin-top:10px}}
+/* Keep the pinned analysis readable within the viewport as outer spacing grows. */
+@media(min-width:901px) and (min-height:650px){
+ .technology.has-phases{padding-top:clamp(20px,calc((100svh - 670px)/2),115px);padding-bottom:clamp(20px,calc((100svh - 670px)/2),110px)}
+ .has-phases .technology-grid{min-height:0}
+}
+@media(min-width:901px) and (min-height:650px) and (max-height:760px){
+ .has-phases .phase-panel li{padding-top:8px;padding-bottom:8px}
+ .has-phases .phase-copy-body{font-size:11px;line-height:1.75}
+}
